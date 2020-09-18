@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.practice.teacher.teacherDAOImpl">
+    <select id="getTeachers" resultType="com.example.practice.teacher.teacherDTO">
+        SELECT * FROM teacher;
+    </select>
+    <insert id="insertTeacher" parameterType="com.example.practice.teacher.teacherDTO">
+        insert into teacher (name,birthday)
+        values (#{name},#{birthday})
+    </insert>
+</mapper>
