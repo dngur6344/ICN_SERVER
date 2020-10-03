@@ -4,4 +4,8 @@
     <select id="getAllSchedules" resultType="com.example.practice.calendar.calendarDTO">
         SELECT * FROM schedule;
     </select>
+    <insert id="insertSchedule" parameterType="com.example.practice.calendar.calendarDTO">
+        insert into schedule (moment,title,description)
+        values (#{moment},#{title},#{description})
+    </insert>
 </mapper>

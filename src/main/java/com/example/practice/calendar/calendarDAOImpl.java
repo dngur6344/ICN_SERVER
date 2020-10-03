@@ -18,4 +18,8 @@ public class calendarDAOImpl implements calendarDAO{
     public List<calendarDTO> getAllSchedules() {
         return sqlSession.selectList(namespace+"getAllSchedules");
     }
+
+    public void insertSchedule(calendarDTO calendarDTO){
+        sqlSession.insert(namespace+"insertSchedule",calendarDTO);
+    }
 }
