@@ -1,10 +1,8 @@
 package com.example.practice.calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,7 +30,7 @@ public class calendarController {
         }
         return listing;
     }
-    @RequestMapping(value="/insertEvent",method= RequestMethod.GET)
+    /*@RequestMapping(value="/insertEvent",method= RequestMethod.GET)
     public void insertEvent(@RequestParam(name="moment") String moment, @RequestParam(name="title") String title, @RequestParam(name="description") String description){
         calendarDTO calendarDTO = new calendarDTO();
         SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -46,6 +44,11 @@ public class calendarController {
         calendarDTO.setMoment(date);
         calendarDTO.setTitle(title);
         calendarDTO.setDescription(description);
+        calendar.insertSchedule(calendarDTO);
+    }*/
+    @PostMapping(value="/insertEvent",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void insertEvent(@RequestBody calendarDTO calendarDTO){
+        SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
         calendar.insertSchedule(calendarDTO);
     }
 }
