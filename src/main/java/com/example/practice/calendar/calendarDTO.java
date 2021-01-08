@@ -1,13 +1,26 @@
 package com.example.practice.calendar;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity(name="schedule")
 public class calendarDTO {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer schedule_no;
+    @Column(length=100,nullable = false)
     public Date moment;
+    @Column(length=100,nullable = false)
     public String title;
+    @Column(length=100,nullable = true)
     public String description;
     public Date getMoment() {
         return moment;
+    }
+
+    public Integer getSchedule_no() {
+        return schedule_no;
     }
 
     public String getTitle() {

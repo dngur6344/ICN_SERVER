@@ -7,19 +7,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
-public class calendarDAOImpl implements calendarDAO{
-    protected static final String namespace = "com.example.practice.calendar.calendarDAOImpl.";
+@Service
+public class calendarDAOImpl{
     @Autowired
-    private SqlSession sqlSession;
+    calendarDAO calendardao;
 
-
-    @Override
-    public List<calendarDTO> getAllSchedules() {
-        return sqlSession.selectList(namespace+"getAllSchedules");
+    public List<calendarDTO> getAllSchedules(){
+        return calendardao.findAll();
     }
-
-    public void insertSchedule(calendarDTO calendarDTO){
-        sqlSession.insert(namespace+"insertSchedule",calendarDTO);
+    public void insertSchedule(calendarDTO calendardto){
+        calendardao.save(calendardto);
+    }
+    public void deleteSchedule(calendarDTO calendardto){
+        calendardao.deleteById(calendardto.getSchedule_no());
     }
 }

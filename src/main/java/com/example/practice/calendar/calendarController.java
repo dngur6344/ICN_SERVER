@@ -30,25 +30,12 @@ public class calendarController {
         }
         return listing;
     }
-    /*@RequestMapping(value="/insertEvent",method= RequestMethod.GET)
-    public void insertEvent(@RequestParam(name="moment") String moment, @RequestParam(name="title") String title, @RequestParam(name="description") String description){
-        calendarDTO calendarDTO = new calendarDTO();
-        SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //transFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
-        Date date = null;
-        try {
-            date = transFormat.parse(moment);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        calendarDTO.setMoment(date);
-        calendarDTO.setTitle(title);
-        calendarDTO.setDescription(description);
-        calendar.insertSchedule(calendarDTO);
-    }*/
     @PostMapping(value="/insertEvent",consumes = MediaType.APPLICATION_JSON_VALUE)
     public void insertEvent(@RequestBody calendarDTO calendarDTO){
-        SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
         calendar.insertSchedule(calendarDTO);
+    }
+    @PostMapping(value="/deleteEvent")
+    public void deleteEvent(@RequestBody calendarDTO calendarDTO){
+        calendar.deleteSchedule(calendarDTO);
     }
 }

@@ -1,41 +1,22 @@
 package com.example.practice.teacher;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.ArrayList;
 
-/*@Service
+@Service
 public class teacherDAOImpl{
     @Autowired
-    teacherDAO teacherDAO;
+    teacherDAO teacherdao;
 
-
-    public List<teacherDTO> getTeachers() {
-        return teacherDAO.getTeachers();
+    public ArrayList<teacherDTO> findAll(){
+        ArrayList<teacherDTO> members = new ArrayList<>();
+        teacherdao.findAll().forEach(e->members.add(e));
+        //System.out.println(teacherdao.findByName("최우혁").get().getBirthday());
+        return members;
     }
-
-
-    public void insertTeacher(teacherDTO teacher) {
-
-    }
-}
-*/
-@Component
-public class teacherDAOImpl implements teacherDAO{
-    protected static final String namespace = "com.example.practice.teacher.teacherDAOImpl.";
-    @Autowired
-    private SqlSession sqlSession;
-
-    @Override
-    public List<teacherDTO> getTeachers(){
-        return sqlSession.selectList(namespace+"getTeachers");
-    }
-
-    @Override
-    public void insertTeacher(teacherDTO teacher) {
-        sqlSession.insert(namespace+"insertTeacher",teacher);
+    public void insertTeacher(teacherDTO teacher){
+        teacherdao.save(teacher);
     }
 }
