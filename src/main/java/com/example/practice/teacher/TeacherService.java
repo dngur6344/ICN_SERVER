@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class teacherDAOImpl{
+public class TeacherService {
     @Autowired
     teacherDAO teacherdao;
 

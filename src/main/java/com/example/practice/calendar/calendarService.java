@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class calendarDAOImpl{
+public class CalendarService {
     @Autowired
     calendarDAO calendardao;
 
