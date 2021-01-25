@@ -26,6 +26,10 @@ public class calendarController {
         }
         return listing;
     }
+    @RequestMapping(value="/last")
+    public List<calendarDTO> getLastEvent(){
+        return calendar.getLastEvent();
+    }
     @PostMapping(value="/insertEvent",consumes = MediaType.APPLICATION_JSON_VALUE)
     public void insertEvent(@RequestBody calendarDTO calendarDTO){
         calendar.insertSchedule(calendarDTO);
