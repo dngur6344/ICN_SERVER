@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/example")
+@RequestMapping(value="/teacher")
 public class TeacherController {
     @Autowired
     TeacherService tt;
     @GetMapping(value="/all")
-    public List<teacherDTO> findAll(){
+    public List<TeacherWithClass> findAll(){
         return tt.findAll();
     }
 
     @RequestMapping(value="/insert")
-    public void inserting(@RequestParam(name="name") String name, @RequestParam(name="birthday") String birthday){
+    public void inserting(@RequestParam(name="name") String teacherName, @RequestParam(name="birthday") String birthday){
         teacherDTO teacher = new teacherDTO();
-        teacher.setName(name);
+        teacher.setTeacherName(teacherName);
         teacher.setBirthday(birthday);
         tt.insertTeacher(teacher);
     }

@@ -21,4 +21,5 @@ public class CalendarService {
     public void deleteSchedule(calendarDTO calendardto){
         calendardao.deleteById(calendardto.getSchedule_no());
     }
+    public List<calendarDTO> getLastEvent(){return calendardao.findRecentEvent(1);}
 }

@@ -1,5 +1,6 @@
 package com.example.practice.teacher;
 
+import com.example.practice.classinf.ClassEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
@@ -18,13 +19,13 @@ public class teacherDTO{
     private Integer teacherNo;
 
     @Column(length=100,nullable = false)
-    private String name;
+    private String teacherName;
     @Column(length=100,nullable = false)
     private String birthday;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    @ManyToOne(fetch=FetchType.LAZY)//Lazy로 해두어서 직접 접근하기 전까진 N+1 상황이 일어나지 않음.
+    @JoinColumn(name="class_no",nullable=false,updatable=false)
+    private ClassEntity classEntity;
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
@@ -33,14 +34,25 @@ public class teacherDTO{
     public teacherDTO() {
     }
 
-    public teacherDTO(Integer teacherNo, String name, String birthday) {
+    public teacherDTO(Integer teacherNo, String teacherName, String birthday, ClassEntity classEntity) {
         this.teacherNo = teacherNo;
-        this.name = name;
+        this.teacherName = teacherName;
+        this.birthday = birthday;
+        this.classEntity = classEntity;
+    }
+
+    public teacherDTO(Integer teacherNo, String teacherName, String birthday) {
+        this.teacherNo = teacherNo;
+        this.teacherName = teacherName;
         this.birthday = birthday;
     }
 
-    public String getName() {
-        return name;
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public String getBirthday() {

@@ -12,11 +12,11 @@ import java.util.Optional;
 
 
 @Repository
-public interface teacherDAO extends JpaRepository<teacherDTO,Integer>{
-    @Override
-    @Query("select new com.example.practice.teacher.teacherDTO(teacherNo,name,birthday) from teacher")
+public interface teacherDAO extends JpaRepository<teacherDTO,Integer>,TeacherCustomRepository{
+    /*@Override
+    @Query("select new com.example.practice.teacher.teacherDTO(teacherNo,teacherName,birthday) from teacher")
     ArrayList<teacherDTO> findAll();
-
-    public Optional<teacherDTO> findByName(String name);
+*/
+    public Optional<teacherDTO> findByTeacherName(String name);
 }
 
