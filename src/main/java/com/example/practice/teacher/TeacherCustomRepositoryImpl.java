@@ -30,6 +30,7 @@ public class TeacherCustomRepositoryImpl extends QuerydslRepositorySupport imple
                     ,teacher.get(classEntity.classNo));
             teachers.add(instance);//새로 만든 TeacherWithClass라는 DTO로 값을 받는 상황
         }
+        System.out.print(super.getEntityManager());//QuerydslRepositorySupport에 entityManager가 bean으로 등록되는데 이 친구는 그대로 있고 호출시 이 친구의 프록시객체가 생성이 되므로 thread-safe하다.
         return teachers;
     }
 }
