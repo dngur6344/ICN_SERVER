@@ -12,7 +12,7 @@ public class TeacherController {
     @Autowired
     TeacherService tt;
     @GetMapping(value="/all")
-    public List<TeacherWithClass> findAll(){
+    public List<TeacherWithClassDTO> findAll(){
         return tt.findAll();
     }
 

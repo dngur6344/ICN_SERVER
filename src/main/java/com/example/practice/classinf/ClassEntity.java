@@ -1,5 +1,6 @@
 package com.example.practice.classinf;
 
+import com.example.practice.student.StudentEntity;
 import com.example.practice.teacher.teacherDTO;
 
 import javax.persistence.*;
@@ -19,6 +20,9 @@ public class ClassEntity{
     @JoinColumn(name = "class_no")
     List<teacherDTO> teachers = new ArrayList<teacherDTO>();
 
+    @OneToMany
+    @JoinColumn(name="class_no")
+    List<StudentEntity> students = new ArrayList<>();
 
     public ClassEntity() {
     }

@@ -7,18 +7,22 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-public class TeacherWithClass {//teacher이름, teacher생일, teacher가 맡는 class의 이름을 같이 불러와 저장하는 dto
+public class TeacherWithClassDTO {//teacher이름, teacher생일, teacher가 맡는 class의 이름을 같이 불러와 저장하는 dto
+    private Integer teacherNo;
     private String teacherName;
     private String birthday;
     private String className;
+    private Integer classNo;
 
-    public TeacherWithClass() {
+    public TeacherWithClassDTO() {
     }
 
-    public TeacherWithClass(String teacherName, String birthday, String className) {
+    public TeacherWithClassDTO(Integer teacherNo, String teacherName, String birthday, String className, Integer classNo) {
         this.teacherName = teacherName;
         this.birthday = birthday;
         this.className = className;
+        this.teacherNo=teacherNo;
+        this.classNo=classNo;
     }
 
     public String getTeacherName() {
