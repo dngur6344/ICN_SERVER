@@ -48,4 +48,20 @@ public class TeacherWithClassDTO {//teacher이름, teacher생일, teacher가 맡
     public void setClassName(String className) {
         this.className = className;
     }
+
+    public Integer getTeacherNo() {
+        return teacherNo;
+    }
+
+    public void setTeacherNo(Integer teacherNo) {
+        this.teacherNo = teacherNo;
+    }
+
+    public Integer getClassNo() {
+        return classNo;
+    }
+
+    public void setClassNo(Integer classNo) {
+        this.classNo = classNo;
+    }
 }
