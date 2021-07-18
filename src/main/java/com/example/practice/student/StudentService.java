@@ -13,4 +13,7 @@ public class StudentService {
     public ArrayList<StudentWithClassDTO> findWithClassAll(){
         return studentRepository.findWithClassAll();
     }
+    public void Save(StudentEntity studentEntity){
+        studentRepository.save(studentEntity);
+    }
 }

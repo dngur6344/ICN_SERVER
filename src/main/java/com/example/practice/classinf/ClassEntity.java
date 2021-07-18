@@ -10,7 +10,8 @@ import java.util.List;
 @Entity(name="class")
 public class ClassEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLASSSEQUENCE") //oracle의 경우 이런식으로 기본키 할당을 해줘야함.
+    @SequenceGenerator(sequenceName = "CLASSSEQUENCE", name = "CLASSSEQUENCE", allocationSize = 1)
     private Integer classNo;
 
     @Column(length=100,nullable = false)

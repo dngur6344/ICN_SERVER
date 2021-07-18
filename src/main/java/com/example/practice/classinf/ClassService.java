@@ -10,4 +10,7 @@ public class ClassService {
     public void insertingClass(ClassEntity classEntity){
         classRepository.save(classEntity);
     }
+    public ClassEntity findbyName(String name){
+        return classRepository.findByClassname(name);
+    }
 }

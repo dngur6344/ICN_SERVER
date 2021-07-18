@@ -15,7 +15,8 @@ import javax.persistence.*;
 @Entity(name="teacher")
 public class teacherDTO{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TEACHERSEQUENCE") //oracle의 경우 이런식으로 기본키 할당을 해줘야함.
+    @SequenceGenerator(sequenceName = "TEACHERSEQUENCE", name = "TEACHERSEQUENCE", allocationSize = 1)
     private Integer teacherNo;
 
     @Column(length=100,nullable = false)

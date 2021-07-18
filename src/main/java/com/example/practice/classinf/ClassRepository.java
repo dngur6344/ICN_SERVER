@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClassRepository extends JpaRepository<ClassEntity,Integer> {
+    public ClassEntity findByClassname(String name);
 }
