@@ -1,12 +1,16 @@
 package com.example.practice.classinf;
 
 import com.example.practice.student.StudentEntity;
-import com.example.practice.teacher.teacherDTO;
+import com.example.practice.teacher.TeacherEntity;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity(name="class")
 public class ClassEntity{
     @Id
@@ -19,7 +23,7 @@ public class ClassEntity{
 
     @OneToMany
     @JoinColumn(name = "class_no")
-    List<teacherDTO> teachers = new ArrayList<teacherDTO>();
+    List<TeacherEntity> teachers = new ArrayList<TeacherEntity>();
 
     @OneToMany
     @JoinColumn(name="class_no")
@@ -29,14 +33,6 @@ public class ClassEntity{
     }
 
     public ClassEntity(String classname) {
-        this.classname = classname;
-    }
-
-    public String getClassname() {
-        return classname;
-    }
-
-    public void setClassname(String classname) {
         this.classname = classname;
     }
 }

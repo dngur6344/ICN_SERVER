@@ -15,7 +15,7 @@ public class ClassController {
     ClassService classService;
 
     @PostMapping(value="/insert",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void inserting(@RequestBody ClassEntity classEntity){
-        classService.insertingClass(classEntity);
+    public void inserting(@RequestBody ClassDTO classDTO){
+        classService.insertingClass(classDTO);
     }
 }

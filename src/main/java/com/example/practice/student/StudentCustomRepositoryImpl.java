@@ -2,7 +2,6 @@ package com.example.practice.student;
 
 
 import com.example.practice.classinf.QClassEntity;
-import com.example.practice.teacher.teacherDTO;
 import com.querydsl.core.Tuple;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 

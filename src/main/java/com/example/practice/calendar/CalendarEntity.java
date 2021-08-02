@@ -5,7 +5,7 @@ import java.util.Date;
 
 @SequenceGenerator(sequenceName = "SCHEDULESEQUENCE", name = "SCHEDULESEQUENCE",initialValue = 1,allocationSize = 1)
 @Entity(name="schedule")
-public class calendarDTO {
+public class CalendarEntity {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)*/
 @Entity(name="teacher")
-public class teacherDTO{
+public class TeacherEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TEACHERSEQUENCE") //oracle의 경우 이런식으로 기본키 할당을 해줘야함.
     @SequenceGenerator(sequenceName = "TEACHERSEQUENCE", name = "TEACHERSEQUENCE", allocationSize = 1)
@@ -32,17 +32,17 @@ public class teacherDTO{
         this.birthday = birthday;
     }
 
-    public teacherDTO() {
+    public TeacherEntity() {
     }
 
-    public teacherDTO(Integer teacherNo, String teacherName, String birthday, ClassEntity classEntity) {
+    public TeacherEntity(Integer teacherNo, String teacherName, String birthday, ClassEntity classEntity) {
         this.teacherNo = teacherNo;
         this.teacherName = teacherName;
         this.birthday = birthday;
         this.classEntity = classEntity;
     }
 
-    public teacherDTO(Integer teacherNo, String teacherName, String birthday) {
+    public TeacherEntity(Integer teacherNo, String teacherName, String birthday) {
         this.teacherNo = teacherNo;
         this.teacherName = teacherName;
         this.birthday = birthday;
@@ -58,5 +58,13 @@ public class teacherDTO{
 
     public String getBirthday() {
         return birthday;
+    }
+
+    public ClassEntity getClassEntity() {
+        return classEntity;
+    }
+
+    public void setClassEntity(ClassEntity classEntity) {
+        this.classEntity = classEntity;
     }
 }

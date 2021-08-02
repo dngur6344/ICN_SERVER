@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TeacherCustomRepositoryImpl extends QuerydslRepositorySupport implements TeacherCustomRepository{
     public TeacherCustomRepositoryImpl(){
-        super(teacherDTO.class);
+        super(TeacherEntity.class);
     }
 
     @Override

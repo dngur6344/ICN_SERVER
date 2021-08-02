@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface calendarDAO extends JpaRepository<calendarDTO,Integer>,CalendarCustomRepository {
+public interface CalendarRepository extends JpaRepository<CalendarEntity,Integer>,CalendarCustomRepository {
 }
