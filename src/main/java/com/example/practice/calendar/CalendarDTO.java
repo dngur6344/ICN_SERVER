@@ -3,7 +3,6 @@ package com.example.practice.calendar;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import java.util.Date;
 
 @Getter

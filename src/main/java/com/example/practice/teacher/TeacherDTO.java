@@ -2,7 +2,6 @@ package com.example.practice.teacher;
 
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
