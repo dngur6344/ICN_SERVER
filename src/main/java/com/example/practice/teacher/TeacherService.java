@@ -27,6 +27,11 @@ public class TeacherService {
         modelMapper.map(teacher,teacherEntity);
         ClassEntity classEntity = classService.findbyName(className);
         teacherEntity.setClassEntity(classEntity);
-        teacherdao.save(teacherEntity);
+        try {
+            teacherdao.save(teacherEntity);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

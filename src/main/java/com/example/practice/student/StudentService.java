@@ -14,6 +14,11 @@ public class StudentService {
         return studentRepository.findWithClassAll();
     }
     public void Save(StudentEntity studentEntity){
-        studentRepository.save(studentEntity);
+        try {
+            studentRepository.save(studentEntity);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
