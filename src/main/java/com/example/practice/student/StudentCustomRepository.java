@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface StudentCustomRepository {
     public ArrayList<StudentWithClassDTO> findWithClassAll();
+    public ArrayList<StudentWithClassDTO> findByClassName(String className);
 }

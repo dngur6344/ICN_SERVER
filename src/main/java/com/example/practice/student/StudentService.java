@@ -21,4 +21,8 @@ public class StudentService {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<StudentWithClassDTO> findByClassName(String className){
+        return studentRepository.findByClassName(className);
+    }
 }
