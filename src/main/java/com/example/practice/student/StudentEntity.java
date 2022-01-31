@@ -1,8 +1,11 @@
 package com.example.practice.student;
 
 import com.example.practice.classinf.ClassEntity;
+import com.example.practice.diary.DiaryEntity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "student")
 public class StudentEntity {
@@ -16,6 +19,22 @@ public class StudentEntity {
 
     @Column(length=100,nullable = false)
     private String birthday;
+
+    @ManyToOne(fetch=FetchType.LAZY)//Lazy로 해두어서 직접 접근하기 전까진 N+1 상황이 일어나지 않음.
+    @JoinColumn(name="class_no",nullable=false,updatable=false)
+    private ClassEntity classEntity;
+
+    @OneToMany
+    @JoinColumn(name="diaryNo")
+    private List<DiaryEntity> diaries = new ArrayList<>();
+
+    public Integer getStudentNo() {
+        return studentNo;
+    }
+
+    public void setStudentNo(Integer studentNo) {
+        this.studentNo = studentNo;
+    }
 
     public String getStudentName() {
         return studentName;
@@ -32,9 +51,6 @@ public class StudentEntity {
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
-    @ManyToOne(fetch=FetchType.LAZY)//Lazy로 해두어서 직접 접근하기 전까진 N+1 상황이 일어나지 않음.
-    @JoinColumn(name="class_no",nullable=false,updatable=false)
-    private ClassEntity classEntity;
 
     public ClassEntity getClassEntity() {
         return classEntity;
@@ -42,5 +58,13 @@ public class StudentEntity {
 
     public void setClassEntity(ClassEntity classEntity) {
         this.classEntity = classEntity;
+    }
+
+    public List<DiaryEntity> getDiaries() {
+        return diaries;
+    }
+
+    public void setDiaries(List<DiaryEntity> diaries) {
+        this.diaries = diaries;
     }
 }

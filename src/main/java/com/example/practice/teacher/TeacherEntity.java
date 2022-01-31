@@ -1,6 +1,7 @@
 package com.example.practice.teacher;
 
 import com.example.practice.classinf.ClassEntity;
+import com.example.practice.diary.DiaryEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
@@ -9,6 +10,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /*@Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)*/
@@ -27,6 +31,10 @@ public class TeacherEntity {
     @ManyToOne(fetch=FetchType.LAZY)//Lazy로 해두어서 직접 접근하기 전까진 N+1 상황이 일어나지 않음.
     @JoinColumn(name="class_no",nullable=false,updatable=false)
     private ClassEntity classEntity;
+
+    @OneToMany
+    @JoinColumn(name="diaryNo")
+    private List<DiaryEntity> diaries = new ArrayList<>();
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
@@ -48,6 +56,14 @@ public class TeacherEntity {
         this.birthday = birthday;
     }
 
+    public Integer getTeacherNo() {
+        return teacherNo;
+    }
+
+    public void setTeacherNo(Integer teacherNo) {
+        this.teacherNo = teacherNo;
+    }
+
     public String getTeacherName() {
         return teacherName;
     }
@@ -66,5 +82,13 @@ public class TeacherEntity {
 
     public void setClassEntity(ClassEntity classEntity) {
         this.classEntity = classEntity;
+    }
+
+    public List<DiaryEntity> getDiaries() {
+        return diaries;
+    }
+
+    public void setDiaries(List<DiaryEntity> diaries) {
+        this.diaries = diaries;
     }
 }

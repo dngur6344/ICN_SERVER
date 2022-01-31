@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @Service
 public class TeacherService {
     @Autowired
-    teacherDAO teacherdao;
+    TeacherRepository teacherdao;
     @Autowired
     ModelMapper modelMapper;
     @Autowired

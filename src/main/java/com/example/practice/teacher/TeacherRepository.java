@@ -9,7 +9,7 @@ import java.util.Optional;
 
 
 @Repository
-public interface teacherDAO extends JpaRepository<TeacherEntity,Integer>,TeacherCustomRepository{
+public interface TeacherRepository extends JpaRepository<TeacherEntity,Integer>,TeacherCustomRepository{
     /*@Override
     @Query("select new com.example.practice.teacher.teacherDTO(teacherNo,teacherName,birthday) from teacher")
     ArrayList<teacherDTO> findAll();
