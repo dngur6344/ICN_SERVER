@@ -21,7 +21,9 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/insert")
-    public void inserting(@RequestParam(name="name") String teacherName, @RequestParam(name="birthday") String birthday, @RequestParam(name="classname")String classname){
+    public void inserting(@RequestParam(name="name") String teacherName,
+                          @RequestParam(name="birthday") String birthday,
+                          @RequestParam(name="classname")String classname){
         TeacherDTO teacher = new TeacherDTO();
         teacher.setTeacherName(teacherName);
         teacher.setBirthday(birthday);

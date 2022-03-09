@@ -3,6 +3,7 @@ package com.example.practice.student;
 
 import com.example.practice.classinf.QClassEntity;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import java.lang.reflect.Array;
@@ -19,27 +20,19 @@ public class StudentCustomRepositoryImpl extends QuerydslRepositorySupport imple
         com.example.practice.student.QStudentEntity studentEntity = QStudentEntity.studentEntity;
         com.example.practice.classinf.QClassEntity classEntity = QClassEntity.classEntity;
 
-        List<Tuple> res = from(studentEntity)
-                .select(studentEntity.studentNo
+        List<StudentWithClassDTO> res = from(studentEntity)
+                .select(Projections.constructor(
+                        StudentWithClassDTO.class
+                        ,studentEntity.studentNo
                         ,studentEntity.studentName
                         ,studentEntity.birthday
                         ,classEntity.classNo
-                        ,classEntity.classname)
-                .join(studentEntity.classEntity,classEntity).fetch();
+                        ,classEntity.classname))
+                .join(studentEntity.classEntity,classEntity)
+                //.fetchJoin()
+                .fetch();
 
-        ArrayList<StudentWithClassDTO> real = new ArrayList<StudentWithClassDTO>();
-
-        for(Tuple student: res){
-            StudentWithClassDTO student_val = new StudentWithClassDTO(
-                    student.get(studentEntity.studentNo)
-                    ,student.get(studentEntity.studentName)
-                    ,student.get(studentEntity.birthday)
-                    ,student.get(classEntity.classNo)
-                    ,student.get(classEntity.classname)
-            );
-            real.add(student_val);
-        }
-        return real;
+        return (ArrayList<StudentWithClassDTO>) res;
     }
 
     @Override
@@ -47,30 +40,22 @@ public class StudentCustomRepositoryImpl extends QuerydslRepositorySupport imple
         com.example.practice.student.QStudentEntity studentEntity = QStudentEntity.studentEntity;
         com.example.practice.classinf.QClassEntity classEntity = QClassEntity.classEntity;
 
-        List<Tuple> res = from(studentEntity)
-                .select(studentEntity.studentNo
+        List<StudentWithClassDTO> res = from(studentEntity)
+                .select(Projections.constructor(
+                        StudentWithClassDTO.class
+                        ,studentEntity.studentNo
                         ,studentEntity.studentName
                         ,studentEntity.birthday
                         ,classEntity.classNo
-                        ,classEntity.classname)
+                        ,classEntity.classname))
                 .join(studentEntity.classEntity,classEntity)
                 .where(studentEntity.classEntity.classname.eq(className))
                 .fetch();
 
-        ArrayList<StudentWithClassDTO> real = new ArrayList<StudentWithClassDTO>();
+        /*** fetch Join을 안해도 N+1 문제가 발생하지 않는다. (selet를 사용하게 되면 Entity가 아닌, Tuple이나 dto로 받아오는 방식이기 때문에 그런 것 같다.)
+         *   물론 select 없이 from만 사용하게 될 때에는 N+1 문제가 발생한다.(이때는 from 에 있는 entity 자체를 가져와서 처리하기 떄문인듯) ***/
 
-        for(Tuple student: res){
-            StudentWithClassDTO student_val = new StudentWithClassDTO(
-                    student.get(studentEntity.studentNo)
-                    ,student.get(studentEntity.studentName)
-                    ,student.get(studentEntity.birthday)
-                    ,student.get(classEntity.classNo)
-                    ,student.get(classEntity.classname)
-            );
-            real.add(student_val);
-        }
-
-        return real;
+        return (ArrayList<StudentWithClassDTO>) res;
     }
 
 
