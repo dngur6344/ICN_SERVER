@@ -21,6 +21,12 @@ public class ScoreEntity {
 
     private Integer score;
 
+    public ScoreEntity(Date regtime, String name, Integer score) {
+        this.regtime = regtime;
+        this.name = name;
+        this.score = score;
+    }
+
     public Long getId() {
         return id;
     }
