@@ -15,6 +15,6 @@ public class ScoreController {
 
     @PostMapping("/register")
     public void save(@RequestBody ScoreDTO scoreDTO){
-
+        scoreService.save(scoreDTO);
     }
 }
