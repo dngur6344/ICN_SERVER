@@ -3,9 +3,13 @@ package com.example.practice.teacher;
 //import com.example.practice.calendar.calendarDTO;
 import com.example.practice.classinf.ClassEntity;
 import com.example.practice.classinf.ClassService;
+import com.example.practice.response.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -16,8 +20,15 @@ public class TeacherController {
     @Autowired
     TeacherService teacherService;
     @GetMapping(value="/all")
-    public List<TeacherWithClassDTO> findAll(){
-        return teacherService.findAll();
+    public ResponseEntity<ResponseMessage>  findAll(){
+        List<TeacherWithClassDTO> list = teacherService.findAll();
+
+        ResponseMessage responseMessage = ResponseMessage.builder()
+                .responseTime(new Date())
+                .data(list)
+                .build();
+
+        return new ResponseEntity<ResponseMessage>(responseMessage, HttpStatus.OK);
     }
 
     @RequestMapping(value="/insert")
