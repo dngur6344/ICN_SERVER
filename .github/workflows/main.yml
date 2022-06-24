@@ -69,8 +69,8 @@ jobs:
         run: echo "${{ secrets.PROPERTIES }}" > ./src/main/resources/application.properties
         shell: bash
         
-      - name: Compile with Maven
-        run: mvn compile
+      - name: Maven generate-sources
+        run: mvn generate-sources
         
       - name: Build with Maven
         run: mvn -B package --file pom.xml
