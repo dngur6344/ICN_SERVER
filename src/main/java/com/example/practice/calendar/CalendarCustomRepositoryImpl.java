@@ -11,7 +11,7 @@ public class CalendarCustomRepositoryImpl extends QuerydslRepositorySupport impl
 
     @Override
     public List<CalendarEntity> findRecentEvent(int limit) {
-        final com.example.practice.calendar.QcalendarDTO calendardto = com.example.practice.calendar.QcalendarDTO.calendarDTO;
-        return from(calendardto).orderBy(calendardto.moment.desc()).limit(1).fetch();
+        final com.example.practice.calendar.QCalendarEntity calendar = QCalendarEntity.calendarEntity;
+        return from(calendar).orderBy(calendar.moment.desc()).limit(1).fetch();
     }
 }
