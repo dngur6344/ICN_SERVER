@@ -22,20 +22,12 @@ public class CalendarService {
     public void insertSchedule(CalendarDTO calendardto){
         CalendarEntity calendarEntity = new CalendarEntity();
         modelMapper.map(calendardto,calendarEntity);
-        try {
-            calendarRepository.save(calendarEntity);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+        calendarRepository.save(calendarEntity);
+
     }
     public void deleteSchedule(CalendarDTO calendardto){
-        try {
-            calendarRepository.deleteById(calendardto.getSchedule_no());
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+        calendarRepository.deleteById(calendardto.getSchedule_no());
+
     }
     public List<CalendarDTO> getLastEvent(){
         List<CalendarEntity> calendarList =  calendarRepository.findRecentEvent(1);

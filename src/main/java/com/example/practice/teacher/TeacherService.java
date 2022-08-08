@@ -5,6 +5,7 @@ import com.example.practice.classinf.ClassService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
@@ -22,16 +23,13 @@ public class TeacherService {
         teacherdao.findWithClass().forEach(e->members.add(e));
         return members;
     }
+
+    @Transactional
     public void insertTeacher(TeacherDTO teacher,String className){
         TeacherEntity teacherEntity=new TeacherEntity();
         modelMapper.map(teacher,teacherEntity);
         ClassEntity classEntity = classService.findbyName(className);
         teacherEntity.setClassEntity(classEntity);
-        try {
-            teacherdao.save(teacherEntity);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+        teacherdao.save(teacherEntity);
     }
 }

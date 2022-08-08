@@ -15,7 +15,7 @@ import static java.util.Calendar.HOUR;
 
 @RestController
 @RequestMapping(value = "/schedule")
-public class calendarController {
+public class CalendarController {
     @Autowired
     CalendarService calendar;
 
