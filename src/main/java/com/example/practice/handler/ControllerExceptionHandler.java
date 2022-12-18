@@ -14,7 +14,7 @@ public class ControllerExceptionHandler {
     public ResponseEntity<ResponseMessage> handleRegisterContentException(RuntimeException e){
         ResponseMessage responseMessage = ResponseMessage.builder()
                 .responseTime(new Date())
-                .data("에러가 발생하였습니다.!!")
+                .data("에러가 발생하였습니다.!!!")
                 .build();
 
         return new ResponseEntity<ResponseMessage>(responseMessage, HttpStatus.FORBIDDEN);
