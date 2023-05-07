@@ -20,6 +20,9 @@ jobs:
     # The type of runner that the job will run on
     name: Build image
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
