@@ -1,26 +1,35 @@
 package com.example.practice.student;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.practice.classinf.ClassEntity;
+import com.example.practice.classinf.ClassRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
 @Service
+@RequiredArgsConstructor
 public class StudentService {
-    @Autowired
-    StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
+    private final ClassRepository classRepository;
 
-    public ArrayList<StudentWithClassDTO> findWithClassAll(){
+    @Transactional(readOnly = true)
+    public ArrayList<StudentWithClassDTO> findWithClassAll() {
         return studentRepository.findWithClassAll();
+
     }
 
     @Transactional
-    public void Save(StudentEntity studentEntity){
-        studentRepository.save(studentEntity);
+    public void createStudent(StudentCreateRequestDTO studentCreateRequestDTO) {
+        ClassEntity classEntity = classRepository.findByClassname(studentCreateRequestDTO.getClassName());
+        Student student = Student.of(studentCreateRequestDTO, classEntity);
+
+        studentRepository.save(student);
     }
 
-    public ArrayList<StudentWithClassDTO> findByClassName(String className){
+    @Transactional(readOnly = true)
+    public ArrayList<StudentWithClassDTO> findByClassName(String className) {
         return studentRepository.findByClassName(className);
     }
 }
