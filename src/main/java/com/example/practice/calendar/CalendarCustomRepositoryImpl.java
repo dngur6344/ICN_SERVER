@@ -1,7 +1,7 @@
 package com.example.practice.calendar;
 
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
-
+import com.example.practice.calendar.QCalendar;
 import java.util.List;
 
 public class CalendarCustomRepositoryImpl extends QuerydslRepositorySupport implements CalendarCustomRepository {
@@ -11,7 +11,7 @@ public class CalendarCustomRepositoryImpl extends QuerydslRepositorySupport impl
 
     @Override
     public List<Calendar> findRecentEvent(int limit) {
-        final com.example.practice.calendar.QCalendarEntity calendar = QCalendarEntity.calendarEntity;
+        QCalendar calendar = QCalendar.calendar;
         return from(calendar).orderBy(calendar.moment.desc()).limit(1).fetch();
     }
 }
