@@ -1,6 +1,6 @@
 package com.example.practice.classinf;
 
-import com.example.practice.student.StudentEntity;
+import com.example.practice.student.Student;
 import com.example.practice.teacher.TeacherEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +27,7 @@ public class ClassEntity{
 
     @OneToMany
     @JoinColumn(name="class_no")
-    List<StudentEntity> students = new ArrayList<>();
+    List<Student> students = new ArrayList<>();
 
     public ClassEntity() {
     }

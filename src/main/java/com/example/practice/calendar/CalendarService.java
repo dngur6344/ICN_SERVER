@@ -1,37 +1,10 @@
 package com.example.practice.calendar;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Service
-public class CalendarService {
-    @Autowired
-    CalendarRepository calendarRepository;
-    @Autowired
-    ModelMapper modelMapper;
-
-    public List<CalendarDTO> getAllSchedules(){
-        List<CalendarEntity> calendarList = calendarRepository.findAll();
-        List<CalendarDTO> calendarDTOList = calendarList.stream().map(p->modelMapper.map(p,CalendarDTO.class)).collect(Collectors.toList());
-        return calendarDTOList;
-    }
-    public void insertSchedule(CalendarDTO calendardto){
-        CalendarEntity calendarEntity = new CalendarEntity();
-        modelMapper.map(calendardto,calendarEntity);
-        calendarRepository.save(calendarEntity);
-
-    }
-    public void deleteSchedule(CalendarDTO calendardto){
-        calendarRepository.deleteById(calendardto.getSchedule_no());
-
-    }
-    public List<CalendarDTO> getLastEvent(){
-        List<CalendarEntity> calendarList =  calendarRepository.findRecentEvent(1);
-        List<CalendarDTO> calendarDTOList =calendarList.stream().map(p->modelMapper.map(p,CalendarDTO.class)).collect(Collectors.toList());
-        return calendarDTOList;
-    }
+public interface CalendarService {
+    List<CalendarDTO> getAllSchedules();
+    void insertSchedule(CalendarDTO calendardto);
+    void deleteSchedule(CalendarDTO calendardto);
+    List<CalendarDTO> getLastEvent();
 }

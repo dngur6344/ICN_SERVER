@@ -2,17 +2,15 @@ package com.example.practice.student;
 
 
 import com.example.practice.classinf.QClassEntity;
-import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentCustomRepositoryImpl extends QuerydslRepositorySupport implements StudentCustomRepository {
     public StudentCustomRepositoryImpl(){
-        super(StudentEntity.class);
+        super(Student.class);
     }
 
     @Override

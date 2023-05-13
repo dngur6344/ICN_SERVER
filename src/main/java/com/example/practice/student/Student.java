@@ -2,13 +2,20 @@ package com.example.practice.student;
 
 import com.example.practice.classinf.ClassEntity;
 import com.example.practice.diary.DiaryEntity;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "student")
-public class StudentEntity {
+@Getter
+@Setter
+@NoArgsConstructor
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STUDENTSEQUENCE") //oracle의 경우 이런식으로 기본키 할당을 해줘야함.
     @SequenceGenerator(sequenceName = "STUDENTSEQUENCE", name = "STUDENTSEQUENCE", allocationSize = 1)
@@ -28,43 +35,21 @@ public class StudentEntity {
     @JoinColumn(name="diaryNo")
     private List<DiaryEntity> diaries = new ArrayList<>();
 
-    public Integer getStudentNo() {
-        return studentNo;
-    }
-
-    public void setStudentNo(Integer studentNo) {
-        this.studentNo = studentNo;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
+    @Builder
+    public Student(String studentName, String birthday, ClassEntity classEntity, List<DiaryEntity> diaries) {
         this.studentName = studentName;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
         this.birthday = birthday;
-    }
-
-    public ClassEntity getClassEntity() {
-        return classEntity;
-    }
-
-    public void setClassEntity(ClassEntity classEntity) {
         this.classEntity = classEntity;
-    }
-
-    public List<DiaryEntity> getDiaries() {
-        return diaries;
-    }
-
-    public void setDiaries(List<DiaryEntity> diaries) {
         this.diaries = diaries;
+    }
+
+    public static Student of(StudentCreateRequestDTO dto, ClassEntity classEntity) {
+        Student student = Student.builder()
+                .studentName(dto.getName())
+                .birthday(dto.getBirthday())
+                .classEntity(classEntity)
+                .build();
+
+        return student;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.practice.diary;
 
-import com.example.practice.student.StudentEntity;
+import com.example.practice.student.Student;
 import com.example.practice.teacher.TeacherEntity;
 
 import javax.persistence.*;
@@ -20,7 +20,7 @@ public class DiaryEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_no",nullable = false)
-    private StudentEntity studentEntity;
+    private Student student;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_no",nullable = false)
@@ -50,12 +50,12 @@ public class DiaryEntity {
         this.comments = comments;
     }
 
-    public StudentEntity getStudentEntity() {
-        return studentEntity;
+    public Student getStudentEntity() {
+        return student;
     }
 
-    public void setStudentEntity(StudentEntity studentEntity) {
-        this.studentEntity = studentEntity;
+    public void setStudentEntity(Student student) {
+        this.student = student;
     }
 
     public TeacherEntity getTeacherEntity() {

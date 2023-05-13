@@ -1,11 +1,19 @@
 package com.example.practice.calendar;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @SequenceGenerator(sequenceName = "SCHEDULESEQUENCE", name = "SCHEDULESEQUENCE",initialValue = 1,allocationSize = 1)
 @Entity(name="schedule")
-public class CalendarEntity {
+@Getter
+@Setter
+@NoArgsConstructor
+public class Calendar {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,31 +26,11 @@ public class CalendarEntity {
     public String title;
     @Column(length=100,nullable = true)
     public String description;
-    public Date getMoment() {
-        return moment;
-    }
 
-    public Integer getSchedule_no() {
-        return schedule_no;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setMoment(Date moment) {
+    @Builder
+    public Calendar(Date moment, String title, String description) {
         this.moment = moment;
-    }
-
-    public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 }
