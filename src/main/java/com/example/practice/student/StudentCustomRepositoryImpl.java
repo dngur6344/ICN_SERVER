@@ -2,6 +2,7 @@ package com.example.practice.student;
 
 
 import com.example.practice.classinf.QClassEntity;
+import com.example.practice.student.QStudent;
 import com.querydsl.core.types.Projections;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
@@ -15,18 +16,18 @@ public class StudentCustomRepositoryImpl extends QuerydslRepositorySupport imple
 
     @Override
     public ArrayList<StudentWithClassDTO> findWithClassAll(){
-        com.example.practice.student.QStudentEntity studentEntity = QStudentEntity.studentEntity;
+        QStudent student = QStudent.student;
         com.example.practice.classinf.QClassEntity classEntity = QClassEntity.classEntity;
 
-        List<StudentWithClassDTO> res = from(studentEntity)
+        List<StudentWithClassDTO> res = from(student)
                 .select(Projections.constructor(
                         StudentWithClassDTO.class
-                        ,studentEntity.studentNo
-                        ,studentEntity.studentName
-                        ,studentEntity.birthday
+                        ,student.studentNo
+                        ,student.studentName
+                        ,student.birthday
                         ,classEntity.classNo
                         ,classEntity.classname))
-                .join(studentEntity.classEntity,classEntity)
+                .join(student.classEntity,classEntity)
                 //.fetchJoin()
                 .fetch();
 
@@ -35,7 +36,7 @@ public class StudentCustomRepositoryImpl extends QuerydslRepositorySupport imple
 
     @Override
     public ArrayList<StudentWithClassDTO> findByClassName(String className) {
-        com.example.practice.student.QStudentEntity studentEntity = QStudentEntity.studentEntity;
+        QStudent studentEntity = QStudent.student;
         com.example.practice.classinf.QClassEntity classEntity = QClassEntity.classEntity;
 
         List<StudentWithClassDTO> res = from(studentEntity)
