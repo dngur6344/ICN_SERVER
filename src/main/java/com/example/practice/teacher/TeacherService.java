@@ -24,10 +24,10 @@ public class TeacherService {
 
     @Transactional
     public void createTeacher(TeacherCreateRequestDTO teacherCreateRequestDTO){
-        TeacherEntity teacherEntity=new TeacherEntity();
-        modelMapper.map(teacherCreateRequestDTO,teacherEntity);
-        ClassEntity classEntity = classService.findbyName(teacherCreateRequestDTO.getClassName());
-        teacherEntity.setClassEntity(classEntity);
-        teacherdao.save(teacherEntity);
+        Teacher teacher =new Teacher();
+        modelMapper.map(teacherCreateRequestDTO, teacher);
+        ClassEntity aClassEntity = classService.findbyName(teacherCreateRequestDTO.getClassName());
+        teacher.setClassEntity(aClassEntity);
+        teacherdao.save(teacher);
     }
 }

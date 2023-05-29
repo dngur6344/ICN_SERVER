@@ -1,6 +1,5 @@
 package com.example.practice.student;
 
-import com.example.practice.classinf.ClassEntity;
 import com.example.practice.classinf.ClassService;
 import com.example.practice.response.ResponseMessage;
 import lombok.RequiredArgsConstructor;

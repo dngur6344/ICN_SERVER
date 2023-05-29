@@ -1,12 +1,12 @@
 package com.example.practice.diary;
 
 import com.example.practice.student.Student;
-import com.example.practice.teacher.TeacherEntity;
+import com.example.practice.teacher.Teacher;
 
 import javax.persistence.*;
 
 @Entity(name = "diary")
-public class DiaryEntity {
+public class Diary {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DIARYSEQUENCE") //oracle의 경우 이런식으로 기본키 할당을 해줘야함.
     @SequenceGenerator(sequenceName = "DIARYSEQUENCE", name = "DIARYSEQUENCE", allocationSize = 1)
@@ -24,7 +24,7 @@ public class DiaryEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_no",nullable = false)
-    private TeacherEntity teacherEntity;
+    private Teacher teacher;
 
     public Integer getDiaryNo() {
         return diaryNo;
@@ -58,11 +58,11 @@ public class DiaryEntity {
         this.student = student;
     }
 
-    public TeacherEntity getTeacherEntity() {
-        return teacherEntity;
+    public Teacher getTeacherEntity() {
+        return teacher;
     }
 
-    public void setTeacherEntity(TeacherEntity teacherEntity) {
-        this.teacherEntity = teacherEntity;
+    public void setTeacherEntity(Teacher teacher) {
+        this.teacher = teacher;
     }
 }

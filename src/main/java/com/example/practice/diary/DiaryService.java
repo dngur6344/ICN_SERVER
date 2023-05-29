@@ -29,13 +29,13 @@ public class DiaryService {
         String insertTime = map.get("insertTime").toString();
         String comments = map.get("comments").toString();
 
-        DiaryEntity diaryEntity = new DiaryEntity();
+        Diary diary = new Diary();
 
-        diaryEntity.setInsertTime(insertTime);
-        diaryEntity.setComments(comments);
-        diaryEntity.setStudentEntity(studentRepository.findById(studentId).get());
-        diaryEntity.setTeacherEntity(teacherRepository.findById(userId).get());
+        diary.setInsertTime(insertTime);
+        diary.setComments(comments);
+        diary.setStudentEntity(studentRepository.findById(studentId).get());
+        diary.setTeacherEntity(teacherRepository.findById(userId).get());
 
-        diaryRepository.save(diaryEntity);
+        diaryRepository.save(diary);
     }
 }

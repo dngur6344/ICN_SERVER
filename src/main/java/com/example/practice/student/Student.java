@@ -1,7 +1,7 @@
 package com.example.practice.student;
 
 import com.example.practice.classinf.ClassEntity;
-import com.example.practice.diary.DiaryEntity;
+import com.example.practice.diary.Diary;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,21 +33,21 @@ public class Student {
 
     @OneToMany
     @JoinColumn(name="diaryNo")
-    private List<DiaryEntity> diaries = new ArrayList<>();
+    private List<Diary> diaries = new ArrayList<>();
 
     @Builder
-    public Student(String studentName, String birthday, ClassEntity classEntity, List<DiaryEntity> diaries) {
+    public Student(String studentName, String birthday, ClassEntity classEntity, List<Diary> diaries) {
         this.studentName = studentName;
         this.birthday = birthday;
         this.classEntity = classEntity;
         this.diaries = diaries;
     }
 
-    public static Student of(StudentCreateRequestDTO dto, ClassEntity classEntity) {
+    public static Student of(StudentCreateRequestDTO dto, ClassEntity aClassEntity) {
         Student student = Student.builder()
                 .studentName(dto.getName())
                 .birthday(dto.getBirthday())
-                .classEntity(classEntity)
+                .classEntity(aClassEntity)
                 .build();
 
         return student;
