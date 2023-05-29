@@ -1,32 +1,34 @@
 package com.example.practice.diary;
 
-import com.example.practice.student.QStudent;
-import com.example.practice.teacher.QTeacherEntity;
 import com.querydsl.core.types.Projections;
-import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import java.util.List;
 
-public class DiaryCustomRepositoryImpl extends QuerydslRepositorySupport implements DiaryCustomRepository {
-    public DiaryCustomRepositoryImpl() {
-        super(DiaryEntity.class);
+import static com.example.practice.diary.QDiary.diary;
+import static com.example.practice.student.QStudent.student;
+import static com.example.practice.teacher.QTeacher.teacher;
+
+public class DiaryCustomRepositoryImpl implements DiaryCustomRepository {
+
+    private JPAQueryFactory jpaQueryFactory;
+
+    public DiaryCustomRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
+        this.jpaQueryFactory = jpaQueryFactory;
     }
 
     @Override
     public List<DiaryStudentTeacherDTO> findByStudentNo(Integer studentNo) {
-        QDiaryEntity qDiaryEntity = QDiaryEntity.diaryEntity;
-        QTeacherEntity qTeacherEntity = QTeacherEntity.teacherEntity;
-        QStudent qStudent = QStudent.student;
 
-        List<DiaryStudentTeacherDTO> res = from(qDiaryEntity)
+        List<DiaryStudentTeacherDTO> res = jpaQueryFactory.selectFrom(diary)
                 .select(Projections.constructor(DiaryStudentTeacherDTO.class,
-                        qDiaryEntity.insertTime,
-                        qDiaryEntity.comments,
-                        qStudent.studentName,
-                        qTeacherEntity.teacherName))
-                .innerJoin(qDiaryEntity.student,qStudent)
-                .innerJoin(qDiaryEntity.teacherEntity,qTeacherEntity)
-                .where(qStudent.studentNo.eq(studentNo))
+                        diary.insertTime,
+                        diary.comments,
+                        student.studentName,
+                        teacher.teacherName))
+                .innerJoin(diary.student, student)
+                .innerJoin(diary.teacher, teacher)
+                .where(student.studentNo.eq(studentNo))
                 .fetch();
 
         return res;

@@ -11,9 +11,9 @@ public class ClassService {
     @Autowired
     ModelMapper modelMapper;
     public void insertingClass(ClassDTO classDTO){
-        ClassEntity classEntity = new ClassEntity();
-        modelMapper.map(classDTO,classEntity);
-        classRepository.save(classEntity);
+        ClassEntity aClassEntity = new ClassEntity();
+        modelMapper.map(classDTO, aClassEntity);
+        classRepository.save(aClassEntity);
     }
     public ClassEntity findbyName(String name){
         return classRepository.findByClassname(name);

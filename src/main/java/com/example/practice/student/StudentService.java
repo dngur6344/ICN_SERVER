@@ -22,8 +22,8 @@ public class StudentService {
 
     @Transactional
     public void createStudent(StudentCreateRequestDTO studentCreateRequestDTO) {
-        ClassEntity classEntity = classRepository.findByClassname(studentCreateRequestDTO.getClassName());
-        Student student = Student.of(studentCreateRequestDTO, classEntity);
+        ClassEntity aClassEntity = classRepository.findByClassname(studentCreateRequestDTO.getClassName());
+        Student student = Student.of(studentCreateRequestDTO, aClassEntity);
 
         studentRepository.save(student);
     }

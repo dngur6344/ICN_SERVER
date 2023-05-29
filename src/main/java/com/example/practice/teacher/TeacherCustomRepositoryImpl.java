@@ -1,31 +1,32 @@
 package com.example.practice.teacher;
 
-import com.example.practice.classinf.QClassEntity;
-import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
-import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class TeacherCustomRepositoryImpl extends QuerydslRepositorySupport implements TeacherCustomRepository{
-    public TeacherCustomRepositoryImpl(){
-        super(TeacherEntity.class);
+import static com.example.practice.classinf.QClassEntity.classEntity;
+import static com.example.practice.teacher.QTeacher.teacher;
+
+public class TeacherCustomRepositoryImpl implements TeacherCustomRepository {
+
+    private final JPAQueryFactory jpaQueryFactory;
+
+    public TeacherCustomRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
+        this.jpaQueryFactory = jpaQueryFactory;
     }
 
     @Override
-    public List<TeacherWithClassDTO> findWithClass(){//Class 테이블과 Teacher 테이블을 조인하여 각 teacher가 어떤 class를 맡고있는지 알려줌.
-        final com.example.practice.teacher.QTeacherEntity teacherEntity = QTeacherEntity.teacherEntity;
-        final com.example.practice.classinf.QClassEntity classEntity = QClassEntity.classEntity;
-        List<TeacherWithClassDTO> res=from(teacherEntity)
+    public List<TeacherWithClassDTO> findWithClass() {//Class 테이블과 Teacher 테이블을 조인하여 각 teacher가 어떤 class를 맡고있는지 알려줌.
+        List<TeacherWithClassDTO> res = jpaQueryFactory.selectFrom(teacher)
                 .select(Projections.constructor(
                         TeacherWithClassDTO.class
-                        ,teacherEntity.teacherNo
-                        ,teacherEntity.teacherName
-                        ,teacherEntity.birthday
-                        ,classEntity.classname
-                        ,classEntity.classNo))
-                .join(teacherEntity.classEntity,classEntity)
+                        , teacher.teacherNo
+                        , teacher.teacherName
+                        , teacher.birthday
+                        , classEntity.classname
+                        , classEntity.classNo))
+                .join(teacher.classEntity, classEntity)
                 .fetch();
 
         /*** fetch Join을 안해도 N+1 문제가 발생하지 않는다. (selet를 사용하게 되면 Entity가 아닌, Tuple이나 dto로 받아오는 방식이기 때문에 그런 것 같다.)
