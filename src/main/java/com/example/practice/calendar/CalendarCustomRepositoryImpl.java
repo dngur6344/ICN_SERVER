@@ -1,16 +1,14 @@
 package com.example.practice.calendar;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 import static com.example.practice.calendar.QCalendar.calendar;
 
+@RequiredArgsConstructor
 public class CalendarCustomRepositoryImpl implements CalendarCustomRepository {
-    public CalendarCustomRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
-        this.jpaQueryFactory = jpaQueryFactory;
-    }
-
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override

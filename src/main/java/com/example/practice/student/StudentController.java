@@ -17,8 +17,6 @@ public class StudentController {
 
     private final StudentService studentService;
 
-    private final ClassService classService;
-
     @RequestMapping(value="/all")
     public ResponseEntity<ResponseMessage> findWithClass(){
         ArrayList<StudentWithClassDTO> studentList = studentService.findWithClassAll();
