@@ -23,7 +23,7 @@ public class DiaryService {
         return diaryRepository.findByStudentNo(studentNo);
     }
 
-    public void insertDiary(Map<String,Object> map){
+    public void createDiary(Map<String,Object> map){
         Integer userId = Integer.parseInt(map.get("userId").toString());
         Integer studentId = Integer.parseInt(map.get("studentId").toString());
         String insertTime = map.get("insertTime").toString();

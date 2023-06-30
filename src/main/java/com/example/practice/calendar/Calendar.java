@@ -19,7 +19,7 @@ public class Calendar {
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SCHEDULESEQUENCE") //oracle의 경우 이런식으로 기본키 할당을 해줘야함.
     @Column(name = "schedule_no")
-    private Integer schedule_no;
+    private Integer scheduleNo;
     @Column(length=100,nullable = false)
     public Date moment;
     @Column(length=100,nullable = false)

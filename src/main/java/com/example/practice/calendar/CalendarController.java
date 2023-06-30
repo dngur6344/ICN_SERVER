@@ -17,21 +17,21 @@ import java.util.List;
 @RequestMapping(value = "/schedule")
 @RequiredArgsConstructor
 public class CalendarController {
-    private final CalendarService calendar;
+    private final CalendarService calendarService;
 
     @RequestMapping(value = "/all")
     public ResponseEntity<ResponseMessage> getAll() {
-        List<CalendarDTO> listing = calendar.getAllSchedules();
+        List<CalendarDTO> calendarList = calendarService.getAllSchedules();
         ResponseMessage responseMessage = ResponseMessage.builder()
                 .responseTime(new Date())
-                .data(listing)
+                .data(calendarList)
                 .build();
         return new ResponseEntity<ResponseMessage>(responseMessage, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/last")
     public ResponseEntity<ResponseMessage> getLastEvent() {
-        List<CalendarDTO> calendarList = calendar.getLastEvent();
+        List<CalendarDTO> calendarList = calendarService.getLastEvent();
         ResponseMessage responseMessage = ResponseMessage.builder()
                 .responseTime(new Date())
                 .data(calendarList)
@@ -41,11 +41,11 @@ public class CalendarController {
 
     @PostMapping(value = "/insertEvent", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void insertEvent(@RequestBody CalendarDTO calendarDTO) {
-        calendar.insertSchedule(calendarDTO);
+        calendarService.insertSchedule(calendarDTO);
     }
 
     @PostMapping(value = "/deleteEvent")
     public void deleteEvent(@RequestBody CalendarDTO calendarDTO) {
-        calendar.deleteSchedule(calendarDTO);
+        calendarService.deleteSchedule(calendarDTO);
     }
 }

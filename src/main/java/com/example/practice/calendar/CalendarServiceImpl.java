@@ -41,7 +41,7 @@ public class CalendarServiceImpl implements CalendarService {
 
     @Transactional
     public void deleteSchedule(CalendarDTO calendardto) {
-        calendarRepository.deleteById(calendardto.getSchedule_no());
+        calendarRepository.deleteById(calendardto.getScheduleNo());
     }
 
     public List<CalendarDTO> getLastEvent() {

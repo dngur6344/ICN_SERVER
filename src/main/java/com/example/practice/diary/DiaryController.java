@@ -1,13 +1,10 @@
 package com.example.practice.diary;
 
 import com.example.practice.response.ResponseMessage;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -15,10 +12,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/diary")
+@RequiredArgsConstructor
 public class DiaryController {
 
-    @Autowired
-    DiaryService diaryService;
+    private final DiaryService diaryService;
 
     @RequestMapping("/search/{studentNo}")
     public ResponseEntity<ResponseMessage> findByStudentNo(@PathVariable(name = "studentNo") Integer studentNo){
@@ -31,8 +28,8 @@ public class DiaryController {
         return new ResponseEntity<ResponseMessage>(responseMessage, HttpStatus.OK);
     }
 
-    @RequestMapping("/register")
-    public void InsertDiary(@RequestBody Map<String,Object> body){
-        diaryService.insertDiary(body);
+    @PostMapping
+    public void createDiary(@RequestBody Map<String,Object> body){
+        diaryService.createDiary(body);
     }
 }
