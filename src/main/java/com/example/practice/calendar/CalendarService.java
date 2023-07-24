@@ -3,8 +3,8 @@ package com.example.practice.calendar;
 import java.util.List;
 
 public interface CalendarService {
-    List<CalendarDTO> getAllSchedules();
-    void insertSchedule(CalendarDTO calendardto);
-    void deleteSchedule(CalendarDTO calendardto);
-    List<CalendarDTO> getLastEvent();
+    List<CalendarDto> getAllSchedules();
+    void createSchedule(CalendarDto calendardto);
+    void deleteSchedule(Integer scheduleId);
+    List<CalendarDto> getLastEvent();
 }

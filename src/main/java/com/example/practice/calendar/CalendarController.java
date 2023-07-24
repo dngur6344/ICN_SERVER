@@ -5,10 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -19,33 +16,39 @@ import java.util.List;
 public class CalendarController {
     private final CalendarService calendarService;
 
-    @RequestMapping(value = "/all")
-    public ResponseEntity<ResponseMessage> getAll() {
-        List<CalendarDTO> calendarList = calendarService.getAllSchedules();
-        ResponseMessage responseMessage = ResponseMessage.builder()
-                .responseTime(new Date())
-                .data(calendarList)
-                .build();
-        return new ResponseEntity<ResponseMessage>(responseMessage, HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<ResponseMessage> getEvents() {
+        List<CalendarDto> calendarList = calendarService.getAllSchedules();
+
+        return createResponseEntity(calendarList);
     }
 
     @RequestMapping(value = "/last")
     public ResponseEntity<ResponseMessage> getLastEvent() {
-        List<CalendarDTO> calendarList = calendarService.getLastEvent();
+        List<CalendarDto> calendarList = calendarService.getLastEvent();
+
+        return createResponseEntity(calendarList);
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseMessage> createEvent(@RequestBody CalendarDto calendarDTO) {
+        calendarService.createSchedule(calendarDTO);
+
+        return createResponseEntity(null);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<ResponseMessage> deleteEvent(@PathVariable("id") Long id) {
+        calendarService.deleteSchedule(id.intValue());
+
+        return createResponseEntity(null);
+    }
+
+    private ResponseEntity<ResponseMessage> createResponseEntity(Object data) {
         ResponseMessage responseMessage = ResponseMessage.builder()
                 .responseTime(new Date())
-                .data(calendarList)
+                .data(data)
                 .build();
         return new ResponseEntity<ResponseMessage>(responseMessage, HttpStatus.OK);
-    }
-
-    @PostMapping(value = "/insertEvent", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void insertEvent(@RequestBody CalendarDTO calendarDTO) {
-        calendarService.insertSchedule(calendarDTO);
-    }
-
-    @PostMapping(value = "/deleteEvent")
-    public void deleteEvent(@RequestBody CalendarDTO calendarDTO) {
-        calendarService.deleteSchedule(calendarDTO);
     }
 }
