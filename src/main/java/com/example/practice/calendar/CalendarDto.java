@@ -8,7 +8,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class CalendarDto {
-    private Integer scheduleNo;
+    private Integer scheduleId;
     public Date moment;
     public String title;
     public String description;
