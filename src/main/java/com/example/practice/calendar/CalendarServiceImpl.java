@@ -16,37 +16,37 @@ public class CalendarServiceImpl implements CalendarService {
     private final CalendarRepository calendarRepository;
     private final ModelMapper modelMapper;
 
-    public List<CalendarDTO> getAllSchedules() {
+    public List<CalendarDto> getAllSchedules() {
         java.util.Calendar cal = java.util.Calendar.getInstance();
         List<Calendar> calendarList = calendarRepository.findAll();
 
-        List<CalendarDTO> calendarDTOList = calendarList.stream()
-                .map(p -> modelMapper.map(p, CalendarDTO.class))
-                .map(calendarDTO -> {
-                    cal.setTime(calendarDTO.getMoment());
+        List<CalendarDto> calendarDtoList = calendarList.stream()
+                .map(p -> modelMapper.map(p, CalendarDto.class))
+                .map(calendarDto -> {
+                    cal.setTime(calendarDto.getMoment());
                     cal.add(HOUR, 9);
-                    calendarDTO.setMoment(cal.getTime());
-                    return calendarDTO;
+                    calendarDto.setMoment(cal.getTime());
+                    return calendarDto;
                 }).collect(Collectors.toList());
 
-        return calendarDTOList;
+        return calendarDtoList;
     }
 
     @Transactional
-    public void insertSchedule(CalendarDTO calendardto) {
+    public void createSchedule(CalendarDto calendardto) {
         Calendar calendar = Calendar.builder().build();
         modelMapper.map(calendardto, calendar);
         calendarRepository.save(calendar);
     }
 
     @Transactional
-    public void deleteSchedule(CalendarDTO calendardto) {
-        calendarRepository.deleteById(calendardto.getScheduleNo());
+    public void deleteSchedule(Integer scheduleId) {
+        calendarRepository.deleteById(scheduleId);
     }
 
-    public List<CalendarDTO> getLastEvent() {
+    public List<CalendarDto> getLastEvent() {
         List<Calendar> calendarList = calendarRepository.findRecentEvent(1);
-        List<CalendarDTO> calendarDTOList = calendarList.stream().map(p -> modelMapper.map(p, CalendarDTO.class)).collect(Collectors.toList());
-        return calendarDTOList;
+        List<CalendarDto> calendarDtoList = calendarList.stream().map(p -> modelMapper.map(p, CalendarDto.class)).collect(Collectors.toList());
+        return calendarDtoList;
     }
 }
