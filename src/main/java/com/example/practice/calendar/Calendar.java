@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @SequenceGenerator(sequenceName = "SCHEDULESEQUENCE", name = "SCHEDULESEQUENCE",initialValue = 1,allocationSize = 1)
@@ -19,16 +20,16 @@ public class Calendar {
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SCHEDULESEQUENCE") //oracle의 경우 이런식으로 기본키 할당을 해줘야함.
     @Column(name = "schedule_no")
-    private Integer scheduleNo;
+    private Integer scheduleId;
     @Column(length=100,nullable = false)
-    public Date moment;
+    public LocalDate moment;
     @Column(length=100,nullable = false)
     public String title;
     @Column(length=100,nullable = true)
     public String description;
 
     @Builder
-    public Calendar(Date moment, String title, String description) {
+    public Calendar(LocalDate moment, String title, String description) {
         this.moment = moment;
         this.title = title;
         this.description = description;

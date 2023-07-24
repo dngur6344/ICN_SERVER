@@ -1,15 +1,22 @@
 package com.example.practice.calendar;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
-@Setter
 public class CalendarDto {
     private Integer scheduleId;
-    public Date moment;
-    public String title;
-    public String description;
+    private LocalDate moment;
+    private String title;
+    private String description;
+
+    @Builder
+    public CalendarDto(Integer scheduleId, LocalDate moment, String title, String description) {
+        this.scheduleId = scheduleId;
+        this.moment = moment;
+        this.title = title;
+        this.description = description;
+    }
 }
