@@ -90,7 +90,7 @@ jobs:
           
       # Build docker image & push
       - name: Image_build and push
-        run : docker buildx build --platform linux/arm64,linux/arm/v7,linux/amd64 --push -f Dockerfile -t dngur6344/teacherapp:${{ secrets.DOCKER_TAG }} .
+        run : docker buildx build --platform linux/arm64,linux/amd64 --push -f Dockerfile -t dngur6344/teacherapp:${{ secrets.DOCKER_TAG }} .
           
       - name: action-slack
         uses : 8398a7/action-slack@v3
