@@ -1,4 +1,4 @@
-package com.example.practice.classinf;
+package com.example.practice.classInfo;
 
 public class ClassDTO {
     private Integer classNo;

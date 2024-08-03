@@ -5,7 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import java.util.List;
 
-import static com.example.practice.classinf.QClassEntity.classEntity;
+import static com.example.practice.classInfo.QClassEntity.classEntity;
 import static com.example.practice.teacher.QTeacher.teacher;
 
 public class TeacherCustomRepositoryImpl implements TeacherCustomRepository {
@@ -26,7 +26,7 @@ public class TeacherCustomRepositoryImpl implements TeacherCustomRepository {
                         , teacher.birthday
                         , classEntity.classname
                         , classEntity.classNo))
-                .join(teacher.classEntity, classEntity)
+                .join(teacher.classInfo, classEntity)
                 .fetch();
 
         /*** fetch Join을 안해도 N+1 문제가 발생하지 않는다. (selet를 사용하게 되면 Entity가 아닌, Tuple이나 dto로 받아오는 방식이기 때문에 그런 것 같다.)

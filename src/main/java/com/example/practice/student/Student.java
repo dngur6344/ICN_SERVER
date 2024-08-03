@@ -1,6 +1,6 @@
 package com.example.practice.student;
 
-import com.example.practice.classinf.ClassEntity;
+import com.example.practice.classInfo.ClassInfo;
 import com.example.practice.diary.Diary;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,35 +21,34 @@ public class Student {
     @SequenceGenerator(sequenceName = "STUDENTSEQUENCE", name = "STUDENTSEQUENCE", allocationSize = 1)
     private Integer studentNo;
 
-    @Column(length = 100,nullable = false)
+    @Column(length = 100, nullable = false)
     private String studentName;
 
-    @Column(length=100,nullable = false)
+    @Column(length = 100, nullable = false)
     private String birthday;
 
-    @ManyToOne(fetch=FetchType.LAZY)//Lazy로 해두어서 직접 접근하기 전까진 N+1 상황이 일어나지 않음.
-    @JoinColumn(name="class_no",nullable=false,updatable=false)
-    private ClassEntity classEntity;
+    @ManyToOne(fetch = FetchType.LAZY)//Lazy로 해두어서 직접 접근하기 전까진 N+1 상황이 일어나지 않음.
+    @JoinColumn(name = "class_no", nullable = false, updatable = false)
+    private ClassInfo classInfo;
 
     @OneToMany
-    @JoinColumn(name="diaryNo")
+    @JoinColumn(name = "diaryNo")
     private List<Diary> diaries = new ArrayList<>();
 
     @Builder
-    public Student(String studentName, String birthday, ClassEntity classEntity, List<Diary> diaries) {
+    public Student(String studentName, String birthday, ClassInfo classInfo, List<Diary> diaries) {
         this.studentName = studentName;
         this.birthday = birthday;
-        this.classEntity = classEntity;
+        this.classInfo = classInfo;
         this.diaries = diaries;
     }
 
-    public static Student of(StudentCreateRequestDTO dto, ClassEntity aClassEntity) {
-        Student student = Student.builder()
+    public static Student of(StudentCreateRequestDTO dto, ClassInfo aClassInfo) {
+
+        return Student.builder()
                 .studentName(dto.getName())
                 .birthday(dto.getBirthday())
-                .classEntity(aClassEntity)
+                .classInfo(aClassInfo)
                 .build();
-
-        return student;
     }
 }

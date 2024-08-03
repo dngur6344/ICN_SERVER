@@ -1,6 +1,6 @@
 package com.example.practice.teacher;
 
-import com.example.practice.classinf.ClassEntity;
+import com.example.practice.classInfo.ClassInfo;
 import com.example.practice.diary.Diary;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +25,7 @@ public class Teacher {
 
     @ManyToOne(fetch=FetchType.LAZY)//Lazy로 해두어서 직접 접근하기 전까진 N+1 상황이 일어나지 않음.
     @JoinColumn(name="class_no",nullable=false,updatable=false)
-    private ClassEntity classEntity;
+    private ClassInfo classInfo;
 
     @OneToMany
     @JoinColumn(name="diaryNo")
@@ -38,11 +38,11 @@ public class Teacher {
     public Teacher() {
     }
 
-    public Teacher(Integer teacherNo, String teacherName, String birthday, ClassEntity classEntity) {
+    public Teacher(Integer teacherNo, String teacherName, String birthday, ClassInfo classInfo) {
         this.teacherNo = teacherNo;
         this.teacherName = teacherName;
         this.birthday = birthday;
-        this.classEntity = classEntity;
+        this.classInfo = classInfo;
     }
 
     public Teacher(Integer teacherNo, String teacherName, String birthday) {

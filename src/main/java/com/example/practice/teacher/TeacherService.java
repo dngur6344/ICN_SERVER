@@ -1,7 +1,7 @@
 package com.example.practice.teacher;
 
-import com.example.practice.classinf.ClassEntity;
-import com.example.practice.classinf.ClassService;
+import com.example.practice.classInfo.ClassInfo;
+import com.example.practice.classInfo.ClassInfoService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class TeacherService {
     private final TeacherRepository teacherdao;
     private final ModelMapper modelMapper;
-    private final ClassService classService;
+    private final ClassInfoService classInfoService;
 
     public ArrayList<TeacherWithClassDTO> findAll() {
         ArrayList<TeacherWithClassDTO> members = new ArrayList<>();
@@ -26,8 +26,8 @@ public class TeacherService {
     public void createTeacher(TeacherCreateRequestDTO teacherCreateRequestDTO){
         Teacher teacher =new Teacher();
         modelMapper.map(teacherCreateRequestDTO, teacher);
-        ClassEntity aClassEntity = classService.findbyName(teacherCreateRequestDTO.getClassName());
-        teacher.setClassEntity(aClassEntity);
+        ClassInfo aClassInfo = classInfoService.findbyName(teacherCreateRequestDTO.getClassName());
+        teacher.setClassInfo(aClassInfo);
         teacherdao.save(teacher);
     }
 }

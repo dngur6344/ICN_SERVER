@@ -1,4 +1,4 @@
-package com.example.practice.classinf;
+package com.example.practice.classInfo;
 
 import com.example.practice.student.Student;
 import com.example.practice.teacher.Teacher;
@@ -11,14 +11,14 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity(name="class")
-public class ClassEntity {
+@Entity(name = "class")
+public class ClassInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLASSSEQUENCE") //oracle의 경우 이런식으로 기본키 할당을 해줘야함.
     @SequenceGenerator(sequenceName = "CLASSSEQUENCE", name = "CLASSSEQUENCE", allocationSize = 1)
     private Integer classNo;
 
-    @Column(length=100,nullable = false)
+    @Column(length = 100, nullable = false)
     private String classname;
 
     @OneToMany
@@ -26,13 +26,13 @@ public class ClassEntity {
     List<Teacher> teachers = new ArrayList<Teacher>();
 
     @OneToMany
-    @JoinColumn(name="class_no")
+    @JoinColumn(name = "class_no")
     List<Student> students = new ArrayList<>();
 
-    public ClassEntity() {
+    public ClassInfo() {
     }
 
-    public ClassEntity(String classname) {
+    public ClassInfo(String classname) {
         this.classname = classname;
     }
 }

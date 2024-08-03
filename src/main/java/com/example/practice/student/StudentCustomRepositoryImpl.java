@@ -5,11 +5,11 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.ArrayList;
 import java.util.List;
-import static com.example.practice.classinf.QClassEntity.classEntity;
+import static com.example.practice.classInfo.QClassEntity.classEntity;
 import static com.example.practice.student.QStudent.student;
 
 public class StudentCustomRepositoryImpl implements StudentCustomRepository {
-    private JPAQueryFactory jpaQueryFactory;
+    private final JPAQueryFactory jpaQueryFactory;
 
     public StudentCustomRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
         this.jpaQueryFactory = jpaQueryFactory;
@@ -25,7 +25,7 @@ public class StudentCustomRepositoryImpl implements StudentCustomRepository {
                         ,student.birthday
                         ,classEntity.classNo
                         ,classEntity.classname))
-                .join(student.classEntity,classEntity)
+                .join(student.classInfo,classEntity)
                 //.fetchJoin()
                 .fetch();
 
@@ -42,8 +42,8 @@ public class StudentCustomRepositoryImpl implements StudentCustomRepository {
                         ,student.birthday
                         ,classEntity.classNo
                         ,classEntity.classname))
-                .join(student.classEntity,classEntity)
-                .where(student.classEntity.classname.eq(className))
+                .join(student.classInfo,classEntity)
+                .where(student.classInfo.classname.eq(className))
                 .fetch();
 
         /*** fetch Join을 안해도 N+1 문제가 발생하지 않는다. (selet를 사용하게 되면 Entity가 아닌, Tuple이나 dto로 받아오는 방식이기 때문에 그런 것 같다.)

@@ -7,10 +7,10 @@ import java.time.LocalDate;
 
 @Getter
 public class CalendarDto {
-    private Integer scheduleId;
-    private LocalDate moment;
-    private String title;
-    private String description;
+    private final Integer scheduleId;
+    private final LocalDate moment;
+    private final String title;
+    private final String description;
 
     @Builder
     public CalendarDto(Integer scheduleId, LocalDate moment, String title, String description) {
@@ -18,5 +18,14 @@ public class CalendarDto {
         this.moment = moment;
         this.title = title;
         this.description = description;
+    }
+
+    public static CalendarDto fromEntity(Calendar calendar) {
+        return CalendarDto.builder()
+                .scheduleId(calendar.getScheduleId())
+                .moment(calendar.getMoment())
+                .title(calendar.getTitle())
+                .description(calendar.getDescription())
+                .build();
     }
 }

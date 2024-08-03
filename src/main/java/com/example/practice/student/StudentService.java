@@ -1,7 +1,7 @@
 package com.example.practice.student;
 
-import com.example.practice.classinf.ClassEntity;
-import com.example.practice.classinf.ClassRepository;
+import com.example.practice.classInfo.ClassInfo;
+import com.example.practice.classInfo.ClassRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +22,8 @@ public class StudentService {
 
     @Transactional
     public void createStudent(StudentCreateRequestDTO studentCreateRequestDTO) {
-        ClassEntity aClassEntity = classRepository.findByClassname(studentCreateRequestDTO.getClassName());
-        Student student = Student.of(studentCreateRequestDTO, aClassEntity);
+        ClassInfo aClassInfo = classRepository.findByClassname(studentCreateRequestDTO.getClassName());
+        Student student = Student.of(studentCreateRequestDTO, aClassInfo);
 
         studentRepository.save(student);
     }

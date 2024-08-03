@@ -1,6 +1,6 @@
 package com.example.practice.teacher;
 
-import com.example.practice.classinf.ClassService;
+import com.example.practice.classInfo.ClassInfoService;
 import com.example.practice.response.ResponseMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping(value="/teacher")
 @RequiredArgsConstructor
 public class TeacherController {
-    private final ClassService classService;
+    private final ClassInfoService classInfoService;
     private final TeacherService teacherService;
 
     @GetMapping(value="/all")
